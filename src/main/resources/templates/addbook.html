@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Biblioteka</title>
+</head>
+<body>
+
+<form method="post" th:action="@{/lib/book/addOrEdit}" th:object="${book}">
+
+    <input type="hidden" th:field="*{id}"/>
+    Tytuł: <input type="text" required th:field="*{title}">
+    Autor: <input type="text" required th:field="*{author}">
+    Nr ISBN: <input type="text" required th:field="*{isbn}">
+    Rok wydania: <input type="date" required th:field="*{yearOfPublishment}">
+    Wydawnictwo: <input type="text" required th:field="*{publishingHouse}">
+
+    <input type="submit" value="Zapisz"/>
+</form>
+
+
+
+</body>
+</html>

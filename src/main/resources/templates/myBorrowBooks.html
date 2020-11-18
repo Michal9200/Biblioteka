@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Biblioteka</title>
+</head>
+<body>
+
+<h3>Dziś jest <span th:text="${todayDate}"></span></h3>
+<a th:href="@{lib/book}">Dostepne książki</a>
+
+<table th:if="${books.size() > 0}">
+    <thead>
+    <tr>
+        <td>Tytuł</td>
+        <td>Autor</td>
+        <td>ISBN</td>
+        <td>Rok wydania</td>
+        <td>Wydawnictwo</td>
+        <td>Data wyporzyczenia</td>
+        <td></td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book, iterStat : ${books}" >
+        <td><span th:text="${book.bookEntity.title}"/></td>
+        <td><span th:text="${book.bookEntity.author}"/></td>
+        <td><span th:text="${book.bookEntity.isbn}"/></td>
+        <td><span th:text="${book.bookEntity.yearOfPublishment}"/></td>
+        <td><span th:text="${book.bookEntity.publishingHouse}"/></td>
+        <td><span th:text="${book.borrowDate}"/></td>
+        <td sec:authorize="hasRole('USER')">
+            <a th:href="@{/lib/myBorrowBooks/delete/} + ${book.id}">Zwróć książkę</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

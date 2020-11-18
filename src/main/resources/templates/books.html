@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Biblioteka</title>
+</head>
+<body>
+<h3>Dziś jest <span th:text="${todayDate}"></span></h3>
+<div th:replace="fragments/log :: logout"></div>
+<a sec:authorize="hasRole('USER')" th:href="@{/lib/myBorrowBooks}">Wyporzyczone książki</a>
+
+<a sec:authorize="hasRole('ADMIN')" th:href="@{/lib/book/add}">Dodaj nową książkę</a>
+
+<form method="post" th:action="@{/lib/book/search}" th:object="${params}">
+    Tytuł: <input type="text" th:field="*{title}"/></br>
+    Author: <input type="text" th:field="*{author}"/></br>
+    ISBN: <input type="text" th:field="*{isbn}"/></br>
+    Rok wydania: <input type="text" th:field="*{yearOfPublishment}"/></br>
+    <input type="submit" value="Filtruj">
+</form>
+
+<h4 th:if=" ${ #lists.isEmpty(books) }">Brak książek w bibliotece</h4>
+
+<table th:if="${books.size() > 0}">
+    <thead>
+    <tr>
+        <td>Tytuł</td>
+        <td>Autor</td>
+        <td>Nr ISBN</td>
+        <td>Rok wydania</td>
+        <td>Wydawnictwo</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book, iterStat : ${books}" >
+        <td><span th:text="${book.title}"/></td>
+        <td><span th:text="${book.author}"/></td>
+        <td><span th:text="${book.isbn}"/></td>
+        <td><span th:text="${book.yearOfPublishment}"/></td>
+        <td><span th:text="${book.publishingHouse}"/></td>
+        <td sec:authorize="hasRole('ADMIN')">
+            <a th:href="@{/lib/book/edit/} + ${book.id}">Edytuj</a>
+        </td>
+        <td sec:authorize="hasRole('ADMIN')">
+            <a th:href="@{/lib/book/delete/} + ${book.id}">Usuń</a>
+        </td>
+        <td sec:authorize="hasRole('USER')">
+            <a th:href="@{/lib/myBorrowBooks/add/} + ${book.id}">Wyporzycz</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+</body>
+</html>

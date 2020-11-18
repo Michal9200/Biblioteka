@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Biblioteka</title>
+</head>
+<body>
+<div th:fragment="log">
+    <div sec:authorize="isAnonymous()">
+        <a th:href="@{/lib/login}">Zaloguj się</a>
+        <a th:href="@{/lib/register}">Zarejestruj konto</a>
+    </div>
+</div>
+
+<div th:fragment="logout">
+<div sec:authorize="isAuthenticated()">
+    <p>Jestes zalogowany jako <span sec:authentication="name"></span></p>
+    <form th:fragment="footer" th:action="@{/lib/logout}">
+        <input type="submit" value="Wyloguj"/>
+    </form>
+</div>
+</div>
+
+</body>
+</html>
