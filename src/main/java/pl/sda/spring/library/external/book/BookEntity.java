@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import pl.sda.spring.library.external.borrowBook.UserBookEntity;
+import pl.sda.spring.library.external.user_book.UserBookEntity;
 
 
 import javax.persistence.*;
