@@ -28,5 +28,10 @@ public class DatabaseUserRepository implements UserRepository {
         return jpaUserEntity.findByUsername(username).map(ent -> new User(ent.getUsername(), ent.getPassword(), ent.getRole()));
     }
 
+    @Override
+    public boolean existsByUsername(String username) {
+        return jpaUserEntity.findByUsername(username).isPresent();
+    }
+
 
 }

@@ -23,11 +23,11 @@
     </thead>
     <tbody>
     <tr th:each="book, iterStat : ${books}" >
-        <td><span th:text="${book.bookEntity.title}"/></td>
-        <td><span th:text="${book.bookEntity.author}"/></td>
-        <td><span th:text="${book.bookEntity.isbn}"/></td>
-        <td><span th:text="${book.bookEntity.yearOfPublishment}"/></td>
-        <td><span th:text="${book.bookEntity.publishingHouse}"/></td>
+        <td><span th:text="${book.book.title}"/></td>
+        <td><span th:text="${book.book.author}"/></td>
+        <td><span th:text="${book.book.isbn}"/></td>
+        <td><span th:text="${book.book.yearOfPublishment}"/></td>
+        <td><span th:text="${book.book.publishingHouse}"/></td>
         <td><span th:text="${book.borrowDate}"/></td>
         <td sec:authorize="hasRole('USER')">
             <a th:href="@{/lib/myBorrowBooks/delete/} + ${book.id}">Zwróć książkę</a>

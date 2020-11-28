@@ -2,12 +2,11 @@ package pl.sda.spring.library.domain.user;
 
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import pl.sda.spring.library.domain.book.Book;
 
-import java.util.Set;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
